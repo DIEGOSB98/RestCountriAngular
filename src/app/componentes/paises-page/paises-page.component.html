@@ -1,0 +1,31 @@
+<div class="mt-5 text-center">
+  <h1 class="text-center">Países del mundo</h1>
+
+  <div class="form-group">
+    <input type="text" class="form-control" #pais (keyup)="searchCountri(pais.value)" id="exampleInputPassword1" placeholder="Buscar País">
+  </div>
+
+  <div class="btn-group">
+    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+      Región
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" style="cursor: pointer" *ngFor="let region of regiones" (click)="getCountries(region)">
+        <i class="fas fa-globe-{{region}}"> {{region}}</i></a>
+    </div>
+  </div>
+</div>
+
+
+<app-loading [loading]="loading"></app-loading>
+<app-error [cadenaError]="error" [estadoError]="estadoError"></app-error>
+
+<div class="card-columns mt-5" style="cursor: pointer" *ngIf="loading">
+  <div class="card" *ngFor="let pais of paises" (click)="viewPais(pais.name)">
+    <img src="{{pais.flag}}" class="card-img-top img-thumbnail" alt="{{pais.flag}}">
+    <div class="card-body">
+      <h5 class="card-title text-center">{{pais.name}}</h5>
+    </div>
+  </div>
+</div>
